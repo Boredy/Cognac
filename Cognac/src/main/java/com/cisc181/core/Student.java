@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import com.cisc181.eNums.eMajor;
 
+import pkgException.PersonException;
+
 public class Student extends Person {
 
 	private eMajor Major;
@@ -23,7 +25,7 @@ public class Student extends Person {
     }
     
 	public Student(String FirstName, String MiddleName, String LastName,Date DOB, eMajor Major,
-			String Address, String Phone_number, String Email)
+			String Address, String Phone_number, String Email) throws PersonException
 	{
 		super(FirstName, MiddleName, LastName, DOB, Address, Phone_number, Email);
 		this.StudentID = UUID.randomUUID();

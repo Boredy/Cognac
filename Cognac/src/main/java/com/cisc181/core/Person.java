@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import pkgException.PersonException;
+
 /*
  * comment
  */
@@ -46,10 +48,9 @@ public abstract class Person implements java.io.Serializable {
 		return DOB;
 	}
 
-	public void setDOB(Date DOB){
+	@SuppressWarnings("deprecation")
+	public void setDOB(Date DOB) throws PersonException{
 		this.DOB = DOB;
-		
-		
 	}
 
 	public void setAddress(String newAddress) {
@@ -88,16 +89,31 @@ public abstract class Person implements java.io.Serializable {
 	 * Constructors Constructor with arguments
 	 */
 
+	@SuppressWarnings("deprecation")
 	public Person(String FirstName, String MiddleName, String LastName,
-			Date DOB, String Address, String Phone_number, String Email)
+			Date DOB, String Address, String Phone_number, String Email) throws PersonException
 	{
 		this.FirstName = FirstName;
 		this.MiddleName = MiddleName;
 		this.LastName = LastName;
-		this.setDOB(DOB);
+		//this.setDOB(DOB);
 		this.address = Address;
-		this.setPhone(Phone_number);
+		//this.setPhone(Phone_number);
 		this.email_address = Email;
+		
+		if (DOB.getYear() < 18) {
+			throw new PersonException("This person is supposed to be dead", this);
+		}
+		else this.setDOB(DOB);
+		
+		String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(Phone_number);
+		if (matcher.matches()) {
+			this.setPhone(Phone_number);
+		}
+		else throw new PersonException("Wrong phone number format", this);
+		
 		
 	}
 
