@@ -17,9 +17,25 @@ public class Enrollment {
 		Grade = grade;
 	}
 	
-	public Enrollment(UUID StudentID, UUID SectionID ) {
+	public Enrollment(UUID StudentID, UUID SectionID) {
 		this.StudentID = StudentID;
 		this.SectionID = SectionID;
 		this.EnrollmentID = UUID.randomUUID();
+	}
+
+	public UUID getSectionID() {
+		return SectionID;
+	}
+
+	public UUID getStudentID() {
+		return StudentID;
+	}
+
+	public UUID getEnrollmentID() {
+		return EnrollmentID;
+	}
+
+	public double getGrade() {
+		return Grade;
 	}
 }

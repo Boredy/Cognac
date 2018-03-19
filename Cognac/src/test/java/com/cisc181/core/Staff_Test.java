@@ -19,7 +19,7 @@ public class Staff_Test {
 	
 	@SuppressWarnings("deprecation")
 	@Test
-	public void test() throws PersonException {
+	public void test() throws Exception {
 		
 		ArrayList<Staff> StaffList = new ArrayList<Staff>();
 		Calendar date = Calendar.getInstance();
@@ -47,16 +47,16 @@ public class Staff_Test {
 			TotalSalary += staff.getSalary();
 		}
 		
-		double AverageSalary = TotalSalary / 5;
+		double AverageSalary = TotalSalary / StaffList.size();
 		
 		assertEquals(30000 , AverageSalary, 0);
 	}
 	
 	@Test
-	public void testException() throws PersonException {
+	public void testException() throws Exception {
 		
-		boolean testExceptionDeadPerson = false;
-		boolean testExceptionWrongPhoneFormat = false;
+		boolean istestExceptionDeadPerson = false;
+		boolean istestExceptionWrongPhoneFormat = false;
 		
 		
 		Calendar date = Calendar.getInstance();
@@ -66,7 +66,7 @@ public class Staff_Test {
 			Staff s6 = new Staff("Q", "R", "S", date.getTime(), "Pluto", "(666)-666-6666", "Email4", "", 5, 50000, date.getTime(), eTitle.MR);
 		} catch (PersonException e) {
 			e.printStackTrace();
-			testExceptionDeadPerson = true;
+			istestExceptionDeadPerson = true;
 		}
 		
 		
@@ -80,11 +80,11 @@ public class Staff_Test {
 			Staff s6 = new Staff("Q", "R", "S", date2.getTime(), "Pluto", "9", "Email4", "", 5, 50000, date2.getTime(), eTitle.MR);
 		} catch (PersonException e) {
 			e.printStackTrace();
-			testExceptionWrongPhoneFormat = true;
+			istestExceptionWrongPhoneFormat = true;
 		}
 		
-		assertEquals(testExceptionDeadPerson, true);
-		assertEquals(testExceptionWrongPhoneFormat, true);
+		assertEquals(istestExceptionDeadPerson, true);
+		assertEquals(istestExceptionWrongPhoneFormat, true);
 		
 	}
 

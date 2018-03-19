@@ -8,5 +8,28 @@ public class Course {
 	private UUID CourseID;
 	private String CourseName;
 	private int GradePoints;
-	private eMajor Major;
+
+	
+	public Course(UUID courseID, String courseName, int gradePoints) {
+		super();
+		CourseID = courseID;
+		CourseName = courseName;
+		GradePoints = gradePoints;
+
+	}
+
+
+	public UUID getCourseID() {
+		return CourseID;
+	}
+
+
+	public String getCourseName() {
+		return CourseName;
+	}
+
+
+	public int getGradePoints() {
+		return GradePoints;
+	}
 }
