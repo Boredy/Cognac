@@ -4,10 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.UUID;
-
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -85,18 +82,25 @@ public class Student_Test {
 					Calendar.getInstance().getTime(), eMajor.BUSINESS, "Address" + i, "(111)-111-1111", "Email" + i));						
 		}
 		
+		double[][]grades={{98,90,96,95,92,93,90,97,94,100},
+		 		  {86,93,96,88,85,89,83,87,99,94},
+				  {85,76,78,80,81,84,82,86,93,95},
+				  {95,78,80,75,89,69,70,84,92,85},
+				  {78,98,84,89,50,78,79,85,99,100},
+				  {89,90,99,98,90,75,89,74,90,84}};
 		
-		for(Section sec : sectionList) {			
+		
+		//setting the enrollment and adding the grades
+		int column = 0;		
+		for(Section sec : sectionList) {	
+			int rowindex = 0;
 			for(Student s : studentList) {				
 				enrollmentList.add(new Enrollment(s.getStudentID(), sec.getSectionID()));
-			}			
-		}
-		
-		for(int i = 0; i < enrollmentList.size(); i++) {
-			enrollmentList.get(i).setGrade(i);					
-		}
-				
-		
+				enrollmentList.get(enrollmentList.size() -1).setGrade(grades[column][rowindex]);
+				rowindex++;
+			}
+			column++;
+		}		
 	}
 
 	@Test
@@ -108,7 +112,7 @@ public class Student_Test {
 		double fifthtotal = 0;
 		double sixthtotal = 0;
 		double seventhtotal = 0;
-		double eighthtotal = 0;
+		double eightotal = 0;
 		double ninethtotal = 0;
 		double tenthtotal = 0;
 		
@@ -137,25 +141,30 @@ public class Student_Test {
 				seventhtotal += e.getGrade();
 			}
 			else if (e.getStudentID() == enrollmentList.get(7).getStudentID()) {
-				eighthtotal += e.getGrade();
+				eightotal += e.getGrade();
 			}
 			else if (e.getStudentID() == enrollmentList.get(8).getStudentID()) {
 				ninethtotal += e.getGrade();
 			}
 			else tenthtotal += e.getGrade();
 			}
-		// gpa formula: (total points / 205) * 4 
-		assertEquals((firsttotal / 205)*4, 2.9, 0.1);
-		assertEquals((secondtotal / 205)*4, 3.0, 0.1);
-		assertEquals((thirdtotal / 205)*4, 3.1, 0.1);
-		assertEquals((fourthtotal / 205)*4, 3.2, 0.1);
-		assertEquals((fifthtotal / 205)*4, 3.3, 0.1);
-		assertEquals((sixthtotal / 205)*4, 3.5, 0.1);
-		assertEquals((seventhtotal / 205)*4, 3.6, 0.1);
-		assertEquals((eighthtotal / 205)*4, 3.7, 0.1);
-		assertEquals((ninethtotal / 205)*4, 3.8, 0.1);
-		assertEquals((tenthtotal / 205)*4, 4, 0.1);
+		
+		// gpa formula: (total points / 6) /100 * 4 
+		
+		assertEquals((((firsttotal/6)/100)*4),3.54,0.1);
+		assertEquals((((secondtotal/6)/100)*4),3.5,0.1);
+		assertEquals((((thirdtotal/6)/100)*4),3.55,0.1);
+		assertEquals((((fourthtotal/6)/100)*4),3.5,0.1);
+		assertEquals((((fifthtotal/6)/100)*4),3.24,0.1);
+		assertEquals((((sixthtotal/6)/100)*4),3.25,0.1);
+		assertEquals((((seventhtotal/6)/100)*4),3.28,0.1);
+		assertEquals((((eightotal/6)/100)*4),3.42,0.1);
+		assertEquals((((ninethtotal/6)/100)*4),3.78,0.1);
+		assertEquals((((tenthtotal/6)/100)*4),3.72,0.1);
 	}
+		
+		
+		
 	
 	@Test
 	public void testCourseAVG() {
@@ -175,9 +184,9 @@ public class Student_Test {
 			course3total += enrollmentList.get(x).getGrade();
 		}
 		
-		assertEquals(course1total/20, 9.5, 0);
-		assertEquals(course2total/20, 29.5, 0);
-		assertEquals(course3total/20, 49.5, 0);
+		assertEquals(course1total/20, 92.25, 0);
+		assertEquals(course2total/20, 82.85, 0);
+		assertEquals(course3total/20, 85.9, 0);
 		
 	}
 	
